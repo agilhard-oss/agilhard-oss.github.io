@@ -58,11 +58,14 @@
 <h2><a name="Usage"></a>Usage</h2>
 <div class="section">
 <h3><a name="Introduction"></a>Introduction</h3>
-<p>The JLink-JPackager Maven plugin is intended to create <a class="externalLink" href="http://openjdk.java.net/jeps/220">Modular Run-Time Images</a> with JDK 9 and above or native installable packages via <a class="externalLink" href="http://openjdk.java.net/jeps/343">jpackage</a> with JDK12 and above.</p>
-<p>Although the jlink and jpackage tools have some limitations in regards to using non module jars and automatic module jars the JLink-JPackager Maven plugin can create ZIP files or package installers with Java Runtimes and mixed real and automatic modules and non modular jars.</p>
-<p>It does this by analyzing java module depdencies of all maven dependencies using the <b>jdeps</b>&gt; java tool and modifying command line parameters for the <b>jlink</b> the <b>jpackage</b> and the <b>java</b> executable based on the findings.</p>
+<p>The <b>JLink-JPackager Maven Plugin</b> is intended to create <a class="externalLink" href="http://openjdk.java.net/jeps/220">Modular Java Run-Time Images</a> via <a class="externalLink" href="http://openjdk.java.net/jeps/282">jlink</a> with <b>JDK 9</b> and above or native installable packages via <a class="externalLink" href="http://openjdk.java.net/jeps/343">jpackage</a> with <b>JDK 12</b> and above.</p>
+<p>Although the <b>jlink</b> and <b>jpackage</b> tools have some limitations in regards to using non module jars and automatic module jars the <b>JLink-JPackager Maven Plugin</b> can create ZIP files for <a class="externalLink" href="http://openjdk.java.net/jeps/220">Modular Java Run-Time Images</a> or package installers with Java Runtimes and mixed real and automatic modules and non modular jars.</p>
+<p>It does this by analyzing java <b>module dependencies</b> of all <b>maven</b> dependencies using the <b>jdeps</b> java tool and modifying command line parameters for the <b>jlink</b> the <b>jpackage</b> and the <b>java</b> executable based on the findings. </p>
+<p>The resulting <b>Java Runtime</b> contains all java <b>system module dependencies</b> of all <b>real modules</b>, all <b>automatic modules</b> and all <b>non-modular</b> JAR files which are put on the classpath.</p>
 <p>NOTE: This is an alpha release which means everything can change until we reach the first milestone release.</p>
-<p>The JLink-JPackager Maven Plugin is available on GitHub: <a class="externalLink" href="https://github.com/agilhard-oss/jlink-jpackager-maven-plugin">jlink-jpackager-maven-plugin</a></p></div>
+<p>The JLink-JPackager Maven Plugin is available on GitHub: <a class="externalLink" href="https://github.com/agilhard-oss/jlink-jpackager-maven-plugin">jlink-jpackager-maven-plugin</a></p>
+<p>It is based on the Apache <a class="externalLink" href="https://github.com/apache/maven-jlink-plugin">maven-jlink-plugin</a></p>
+<p>The intended artifacts to be linked together into a Modular Run-Time Image are the <b>jmod</b> and <b>jar</b> files. JMod files can be created by using the <a href="../maven-jmod-plugin/">Maven JMod Plugin</a> and <b>jar</b> files can be created by using the <a href="../maven-jar-plugin/">Maven JAR Plugin</a>.</p></div>
 <div class="section">
 <h3><a name="Configuration_of_the_JLink-JPackager_Maven_Plugin"></a>Configuration of the JLink-JPackager Maven Plugin</h3>
 <p>To use the JLink-JPackager Maven Plugin you have to configure it as an <tt>extensions</tt> which means the configuration in your pom file has to look like this:</p>
@@ -84,7 +87,7 @@
       &lt;/plugin&gt;
    [...]
 &lt;/project&gt;</pre></div>
-<p>The configuration element contains the configuration for the plugin <a class="externalLink" href="https://maven.apache.org/guides/mini/guide-configuring-plugins.html">like any other Maven plugin</a>. The different elements which can be configured for this plugin can identified by the <a href="./plugin-info.html">goals documentation</a>.</p></div>
+<p>The configuration element contains the configuration for the plugin <a class="externalLink" href="https://maven.apache.org/guides/mini/guide-configuring-plugins.html">}like any other Maven plugin</a>. The different elements which can be configured for this plugin can identified by the <a href="./plugin-info.html">goals documentation</a>.</p></div>
 <div class="section">
 <h3><a name="Requirements"></a>Requirements</h3>
 <p>Based on the foundation of the plugin it is required to have at least JDK 9 installed to use the jlink goal and at least JDK11/12 installed to use the jpackager goal. This means either you have it configured via <b>JAVA_HOME</b> which means to run the whole Maven build with JDK 9/12 or via <b>Toolchains</b>.</p>
@@ -290,13 +293,13 @@
 <p>Packages build with the <b>jpackager</b> goal are deployed into the repository with a maven classifier based on the package type and the extension for the package format, eg. .rpm .msi </p></div>
 <div class="section">
 <h3><a name="Using_Mixed_real_and_automatic_modules_plus_non_modular_JARs"></a>Using Mixed real and automatic modules plus non modular JARs</h3>
-<p>Although the jlink and jpackage tools have some limitations in regards to using non module jars and automatic module jars the JLink-JPackager Maven plugin can create ZIP files or package installers with Java Runtimes and mixed real and automatic modules and non modular jars.</p>
-<p>It does this by analyzing java module depdencies of all maven dependencies using the <b>jdeps</b>&gt; java tool and modifying command line parameters for the <b>jlink</b> the <b>jpackage</b> and the <b>java</b> executable based on the findings.</p>
-<p>For jlink execution mode jars which are automatic jars or non-modular jars these are copied into the folder created by jlink after jlink execution and before creating the result ZIP file.</p>
-<p>For jpackage execution mode jars which are automatic jars or non-modular jars these are copied into the folder used with the jpackage --input parameter before jpackage execution.</p>
-<p>For jlink execution mode a startup script is generated by a template engine which contains the necessary command line parameters to put automatic jars on the module path and non-modular jars on the classpath.</p>
-<p>For jpackage execution mode the --arguments parameter for jpackage is modified to put automatic jars on the module path and non-modular jars on the classpath.</p>
-<p>The <a href="./jpacktool-prepare-mojo.html">jlink-jpackager:jpacktool-prepare</a> goal prepares the execution of the <a href="./jlink-mojo.html">jlink-jpackager:jlink</a> and <a href="./jpackager-mojo.html">jlink-jpackager:jpackager</a> goals by analyzing java module dependencies and copying files from maven dependencies.</p>
+<p>Although the <b>jlink</b> and <b>jpackage</b> tools have some limitations in regards to using non module jars and automatic module jars the JLink-JPackager Maven plugin can create ZIP files or package installers with Java Runtimes and mixed real and automatic modules and non modular jars.</p>
+<p>It does this by analyzing java module depdencies of all maven dependencies using the <b>jdeps</b> java tool and modifying command line parameters for the jlink the jpackage and the java executable based on the findings.</p>
+<p>For <b>jlink</b> execution mode jars which are <b>automatic</b> jars or <b>non-modular</b> jars these are copied into the folder created by <b>jlink</b> after <b>jlink</b> execution and before creating the result <b>ZIP</b> file.</p>
+<p>For <b>jpackage</b> execution mode jars which are <b>automatic</b> jars or <b>non-modular</b> jars these are copied into the folder used with the jpackage <b>--input</b> parameter before <b>jpackage</b> execution.</p>
+<p>For <b>jlink</b> execution mode a startup script is generated by a <b>template engine</b> which generates the necessary command line parameters to put <b>automatic</b> jars on the <b>module path</b> and <b>non-modular</b> jars on the <b>classpath</b>.</p>
+<p>For <b>jpackage</b> execution mode the <b>--arguments</b> parameter for <b>jpackage</b>&gt; is modified to put <b>automatic</b> jars on the <b>module path</b> and <b>non-modular</b> jars on the <b>classpath.</b></p>
+<p>The <a href="./jpacktool-prepare-mojo.html&quot;">jlink-jpackager:jpacktool-prepare</a> goal prepares the execution of the <a href="./jlink-mojo.html">jlink-jpackager:jlink</a> and <a href="./jpackager-mojo.html">jlink-jpackager:jpackager</a> goals by analyzing java <b>module dependencies</b> and copying files from <b>maven</b> dependencies.</p>
 <p>To select this execution mode use one of the <b>jpacktool-jlink</b> or <b>jpacktool-jpackager</b> maven packaging modes.</p>
 <div class="source">
 <pre>&lt;project ...&gt;
@@ -306,7 +309,7 @@
     &lt;artifactId&gt;parent&lt;/artifactId&gt;
     &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
   &lt;/parent&gt;
-  &lt;packaging&gt;jpacktool-jlink&lt;/packaging&gt;
+  &lt;packaging&gt;jpackage-jlink&lt;/packaging&gt;
   &lt;artifactId&gt;mod-jlink&lt;/artifactId&gt;
    [...]
 &lt;/project&gt;</pre></div>
@@ -318,8 +321,8 @@
     &lt;artifactId&gt;parent&lt;/artifactId&gt;
     &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
   &lt;/parent&gt;
-  &lt;packaging&gt;jpacktool-jpackager&lt;/packaging&gt;
-  &lt;artifactId&gt;mod-jpackager&lt;/artifactId&gt;
+  &lt;packaging&gt;jlink&lt;/packaging&gt;
+  &lt;artifactId&gt;mod-jlink&lt;/artifactId&gt;
    [...]
 &lt;/project&gt;</pre></div></div></div>
       </div>
