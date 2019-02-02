@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"net.agilhard.maven.plugins.jpacktool.mojo.base"}]
