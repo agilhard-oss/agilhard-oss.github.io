@@ -1,0 +1,6 @@
+net.agilhard.maven.plugins.jpacktool.base.handler
+net.agilhard.maven.plugins.jpacktool.filter
+net.agilhard.maven.plugins.jpacktool.mojo.base
+net.agilhard.maven.plugins.jpacktool.mojo.jlink
+net.agilhard.maven.plugins.jpacktool.mojo.jpackager
+net.agilhard.maven.plugins.jpacktool.template
