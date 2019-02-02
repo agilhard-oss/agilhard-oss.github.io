@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"net.agilhard.maven.plugins.jlink"},{"l":"net.agilhard.maven.plugins.jpackager"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"net.agilhard.maven.plugins.jpacktool.base.handler"},{"l":"net.agilhard.maven.plugins.jpacktool.filter"},{"l":"net.agilhard.maven.plugins.jpacktool.mojo.base"},{"l":"net.agilhard.maven.plugins.jpacktool.mojo.jlink"},{"l":"net.agilhard.maven.plugins.jpacktool.mojo.jpackager"},{"l":"net.agilhard.maven.plugins.jpacktool.template"}]
