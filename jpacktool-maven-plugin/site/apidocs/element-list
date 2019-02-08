@@ -1,0 +1,4 @@
+net.agilhard.maven.plugins.jpacktool.extend.mojo
+net.agilhard.maven.plugins.jpacktool.handler
+net.agilhard.maven.plugins.jpacktool.mojo
+net.agilhard.maven.plugins.jpacktool.update4j

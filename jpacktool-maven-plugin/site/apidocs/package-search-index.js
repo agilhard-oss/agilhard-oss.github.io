@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"net.agilhard.maven.plugins.jpacktool.extend.mojo"},{"l":"net.agilhard.maven.plugins.jpacktool.handler"},{"l":"net.agilhard.maven.plugins.jpacktool.mojo"},{"l":"net.agilhard.maven.plugins.jpacktool.update4j"}]
