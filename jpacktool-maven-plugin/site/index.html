@@ -74,11 +74,16 @@
 <p>jlink, jpackager, jpacktool-jlink, jpacktool-jpackager, jpacktool-jlink, jpacktool-generic, jpacktool-bootstrap, jpacktool-business</p></div>
 <div class="section">
 <h3><a name="Goals_Overview"></a>Goals Overview</h3>
-<p>The JPacktool Maven Plugin has three goals:</p>
+<p>The JPacktool Maven Plugin has eight goals:</p>
 <ul>
-<li><a href="./jlink-mojo.html">jlink-jpackager:jlink</a> create a Java Run Time Image from <b>jar</b>/<b>jmod</b> files.</li>
-<li><a href="./jpackager-mojo.html">jlink-jpackager:jpackager</a> create a native installer package with the <b>jpackage</b> tool.</li>
-<li><a href="./help-mojo.html">jlink-jpackager:help</a> displays help information on maven-jlink-plugin.</li></ul></div>
+<li><a href="./help-mojo.html">jpacktool:help</a> displays help information on maven-jlink-plugin.</li>
+<li><a href="./jlink-mojo.html">jpacktool:jlink</a> create a Java Run Time Image from <b>jar</b>/<b>jmod</b> files.</li>
+<li><a href="./jpackager-mojo.html">jpacktool:jpackager</a> create a native installer package with the <b>jpackage</b> tool.</li>
+<li><a href="./jpacktool-prepare-mojo.html&quot;">jpacktool:jpacktool-prepare</a> Prepare execution of the jlink and jpackager goals by analyzing java module dependencies and copying files from maven dependecies.</li>
+<li><a href="./jpacktool-generate-pom-mojo.html">jpacktool:jpacktool-generate-pom</a> Generate pom for packaging a project using a Bootstrap and a Business Application.</li>
+<li><a href="#jpacktool-invoke-pom-mojo.html">jpacktool:jpacktool-invoke-pom</a> Invoke clean install on generated pom.</li>
+<li><a href="#jpacktool-pack-bootstrap-mojo.html">jpacktool:jpacktool-pack-bootstrap</a> Package a Bootstrap Application which can start a Business Application.</li>
+<li><a href="./jpacktool-pack-business-mojo.html">jpacktool:jpacktool-pack-business</a> Package a Business Application started from a Bootstrap Application.</li></ul></div>
 <div class="section">
 <h3><a name="Usage"></a>Usage</h3>
 <p>General instructions on how to use the JPacktool Plugin can be found on the <a href="./usage.html">usage page</a>. </p>
